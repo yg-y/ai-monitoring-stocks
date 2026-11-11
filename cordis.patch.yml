@@ -1,0 +1,5 @@
+# Bundle patch: one Host row. The `dsh.client` declaration in package.json adds
+# the browser half, so this row also gives the Web UI its sidebar entry and page.
+- insert:
+    - id: ashare-radar
+      name: '@local/ashare-radar'

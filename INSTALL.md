@@ -5,7 +5,7 @@
 | 项 | 说明 |
 | --- | --- |
 | 包名 | `@local/ashare-radar`（本地包，不发布也能用） |
-| 版本 | 0.1.0 |
+| 版本 | 0.1.1 |
 | 开发验证环境 | DSH 0.2.2-rc.1，Desktop profile（`~/.dsh/profiles/desktop`） |
 | 运行依赖 | 无（`dependencies` 为空） |
 | 宿主服务 | `webServer`（HTTP 路由）、`tools`（Agent 工具）；`llm` + `agentDefaultModel`（AI 分析，缺失时该面板降级）；`connection`（POST 路由鉴权，缺失时放行） |
@@ -31,27 +31,27 @@
 每个 tag 会由 GitHub Actions 自动构建 tgz 并附到 Release，所以最省事的是直接从 Release 装：
 
 ```
-plugin_manager  install_bundle  target=https://github.com/yg-y/ai-monitoring-stocks/releases/download/v0.1.0/local-ashare-radar-0.1.0.tgz
+plugin_manager  install_bundle  target=https://github.com/yg-y/ai-monitoring-stocks/releases/download/v0.1.1/local-ashare-radar-0.1.1.tgz
 ```
 
 底层是 pnpm，接受 URL 形式的 `file:` 规格。想先落盘再装：
 
 ```bash
-curl -LO https://github.com/yg-y/ai-monitoring-stocks/releases/download/v0.1.0/local-ashare-radar-0.1.0.tgz
-plugin_manager  install_bundle  target=./local-ashare-radar-0.1.0.tgz
+curl -LO https://github.com/yg-y/ai-monitoring-stocks/releases/download/v0.1.1/local-ashare-radar-0.1.1.tgz
+plugin_manager  install_bundle  target=./local-ashare-radar-0.1.1.tgz
 ```
 
 解包安装（不依赖「安装目标可以是压缩包」这个特性）：
 
 ```bash
-mkdir -p ~/plugins && tar -xzf local-ashare-radar-0.1.0.tgz -C ~/plugins
+mkdir -p ~/plugins && tar -xzf local-ashare-radar-0.1.1.tgz -C ~/plugins
 mv ~/plugins/package ~/plugins/ashare-radar
 ```
 
 也可以直接按 git 源装（跟随 main 分支，或钉到 tag）：
 
 ```
-plugin_manager  install_bundle  target=github:yg-y/ai-monitoring-stocks#v0.1.0
+plugin_manager  install_bundle  target=github:yg-y/ai-monitoring-stocks#v0.1.1
 ```
 
 ## 路线 C：走 registry（多台机器时最省事）
@@ -61,7 +61,7 @@ plugin_manager  install_bundle  target=github:yg-y/ai-monitoring-stocks#v0.1.0
 3. 目标机直接按包名安装：
 
    ```
-   plugin_manager  install_bundle  target=@yourname/ashare-radar@0.1.0
+   plugin_manager  install_bundle  target=@yourname/ashare-radar@0.1.1
    ```
 
 这条路的好处是升级只要改版本号，卸载一条命令。

@@ -1,6 +1,6 @@
 {
   "name": "@local/ashare-radar",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "A-share real-time radar: index tape, sentiment, sector rotation and multi-strategy stock picks in one panel.",
   "license": "MIT",

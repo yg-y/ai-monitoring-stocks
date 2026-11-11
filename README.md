@@ -18,6 +18,16 @@ You can also grab the tarball from
 [Releases](https://github.com/yg-y/ai-monitoring-stocks/releases), or follow the
 other two routes in [INSTALL.md](./INSTALL.md).
 
+## Screenshots
+
+![A-share radar dashboard](docs/dashboard.png)
+
+*Index tape, market breadth, sector rotation, watchlist and the top-50 sector trend — captured live during the session.*
+
+![Stock detail](docs/detail.png)
+
+*Stock detail: daily candles with volume and MACD, order book, boards, money flow, technicals and news.*
+
 ## What it shows
 
 | Block | Content | Refresh |

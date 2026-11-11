@@ -15,6 +15,16 @@ plugin_manager  install_bundle  target=github:yg-y/ai-monitoring-stocks
 也可以从 [Release](https://github.com/yg-y/ai-monitoring-stocks/releases) 下载 tgz，或按
 [INSTALL.md](./INSTALL.md) 的另外两条路线。
 
+## 截图
+
+![A股盯盘台](docs/dashboard.png)
+
+*指数条、市场情绪、板块轮动、自选盯盘与板块走势（前 50）——交易时段实拍。*
+
+![个股详情](docs/detail.png)
+
+*个股详情：日K + 成交量 + MACD、盘口、所属板块、资金流向、技术面与消息面。*
+
 ## 面板内容
 
 | 区块 | 内容 | 刷新 |

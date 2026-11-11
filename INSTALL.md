@@ -28,21 +28,31 @@
 
 ## 路线 B：用打好的 tarball
 
-工作区里已经有 `ashare-radar-0.1.0.tgz`（70 KB，npm 标准 `package/` 结构）。
+每个 tag 会由 GitHub Actions 自动构建 tgz 并附到 Release，所以最省事的是直接从 Release 装：
+
+```
+plugin_manager  install_bundle  target=https://github.com/yg-y/ai-monitoring-stocks/releases/download/v0.1.0/local-ashare-radar-0.1.0.tgz
+```
+
+底层是 pnpm，接受 URL 形式的 `file:` 规格。想先落盘再装：
 
 ```bash
-# 目标机上解包，再按路线 A 安装
-mkdir -p ~/plugins && tar -xzf ashare-radar-0.1.0.tgz -C ~/plugins
+curl -LO https://github.com/yg-y/ai-monitoring-stocks/releases/download/v0.1.0/local-ashare-radar-0.1.0.tgz
+plugin_manager  install_bundle  target=./local-ashare-radar-0.1.0.tgz
+```
+
+解包安装（不依赖「安装目标可以是压缩包」这个特性）：
+
+```bash
+mkdir -p ~/plugins && tar -xzf local-ashare-radar-0.1.0.tgz -C ~/plugins
 mv ~/plugins/package ~/plugins/ashare-radar
 ```
 
-也可以直接把 `.tgz` 作为安装目标（底层是 pnpm，接受 `file:` 规格）：
+也可以直接按 git 源装（跟随 main 分支，或钉到 tag）：
 
 ```
-plugin_manager  install_bundle  target=/path/to/ashare-radar-0.1.0.tgz
+plugin_manager  install_bundle  target=github:yg-y/ai-monitoring-stocks#v0.1.0
 ```
-
-这条依赖 Harness 版本对「安装目标可以是压缩包」的支持；不生效时退回上面解包再装。
 
 ## 路线 C：走 registry（多台机器时最省事）
 

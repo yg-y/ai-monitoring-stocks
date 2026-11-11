@@ -6,6 +6,14 @@ limit-up ladder, sector rotation, scored stock picks, your watchlist and an
 intraday alert feed. The same engine is exposed to the Agent as the
 `ashare_radar` Tool.
 
+**安装（一条命令）**：
+
+```
+plugin_manager  install_bundle  target=github:yg-y/ai-monitoring-stocks
+```
+
+也可以从 [Release](https://github.com/yg-y/ai-monitoring-stocks/releases) 下载 tgz，或按 [INSTALL.md](./INSTALL.md) 的另外两条路线。
+
 ## What it shows
 
 | Block | Content | Refresh |
@@ -168,3 +176,7 @@ codes?: ["600519"]   limit?: 8
 - 自选、刷新频率与模拟账户存在浏览器 `localStorage`（`ashare-radar.watchlist.v1`、`ashare-radar.speed.v1`、`ashare-radar.account.v1`）。
 - **买卖是模拟盘**：按最新价在本地记账（初始 100 万，100 股一手），不接券商、不发真实委托。
 - 策略信号只描述规则命中，**不构成投资建议**。
+
+## License
+
+MIT —— 见 [LICENSE](./LICENSE)。行情数据来自东方财富、腾讯、雪球的公开接口，仅供个人研究使用，不构成投资建议。

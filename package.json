@@ -3,12 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "description": "A-share real-time radar: index tape, sentiment, sector rotation and multi-strategy stock picks in one panel.",
+  "license": "MIT",
+  "author": "young.yg",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yg-y/ai-monitoring-stocks.git"
+  },
+  "homepage": "https://github.com/yg-y/ai-monitoring-stocks#readme",
+  "bugs": {
+    "url": "https://github.com/yg-y/ai-monitoring-stocks/issues"
+  },
+  "keywords": ["dsh-plugin", "a-share", "stock", "market", "realtime"],
   "type": "module",
   "exports": {
     ".": "./index.js",
     "./client": "./client.js",
     "./engine": "./engine.js",
     "./analysis": "./analysis.js",
+    "./sector-store": "./sector-store.js",
     "./locale/*.json": "./locale/*.json",
     "./icon": "./icon.svg"
   },
@@ -16,12 +28,14 @@
     "index.js",
     "engine.js",
     "analysis.js",
+    "sector-store.js",
     "client.js",
     "cordis.patch.yml",
     "locale/*.json",
     "icon.svg",
     "README.md",
-    "INSTALL.md"
+    "INSTALL.md",
+    "LICENSE"
   ],
   "dsh": {
     "bundle": {

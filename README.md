@@ -1,32 +1,36 @@
-# A股盯盘台 · A-share radar
+# A-share radar
 
-A DeepSeek Harness plugin that puts a real-time A-share desk in the Web UI: one
-sidebar entry opens a full page with the index tape, market breadth, the
-limit-up ladder, sector rotation, scored stock picks, your watchlist and an
+A DeepSeek Harness plugin that turns the Web UI into a real-time A-share trading
+desk: one sidebar entry opens a full page with the index tape, market breadth,
+the limit-up ladder, sector rotation, scored stock picks, a watchlist and an
 intraday alert feed. The same engine is exposed to the Agent as the
-`ashare_radar` Tool.
+`ashare_radar` tool.
 
-**安装（一条命令）**：
+**English** · [简体中文](./README.zh-CN.md)
+
+**Install with one command:**
 
 ```
 plugin_manager  install_bundle  target=github:yg-y/ai-monitoring-stocks
 ```
 
-也可以从 [Release](https://github.com/yg-y/ai-monitoring-stocks/releases) 下载 tgz，或按 [INSTALL.md](./INSTALL.md) 的另外两条路线。
+You can also grab the tarball from
+[Releases](https://github.com/yg-y/ai-monitoring-stocks/releases), or follow the
+other two routes in [INSTALL.md](./INSTALL.md).
 
 ## What it shows
 
 | Block | Content | Refresh |
 | --- | --- | --- |
-| 指数条 | 上证 / 深成 / 创业板 / 科创50 / 北证50，点击任一指数看分时与 K 线 | 3–30 s (selectable) |
-| 市场情绪 | 涨跌家数、涨停/跌停、炸板率、连板梯队、0–100 情绪分 | 5 s |
-| 推荐板块 | 行业与概念板块按「涨幅 + 主力净流入 + 上涨宽度 + 5日动量」打分，点击进入成分股 | 20 s |
-| 板块走势 | 前 50 个板块的当日涨跌幅曲线（09:30–15:00），末端标注板块名，可按天回看，最多 30 天 | 60 s |
-| 推荐个股 | 候选池 → 多策略打分 → 技术面复核，附命中标签与理由 | 45 s |
-| 自选盯盘 | 实时价、涨跌幅、量比、主力净额、命中信号；支持代码或名称搜索 | 3–30 s |
-| 我的持仓 | 模拟账户总资产、市值、浮动盈亏，点击持仓回到个股 | 随快照 |
-| 盘中异动 | 涨停、逼近涨停、涨速、量比、主力异动、站上/跌破均线、20 日新高 | 随快照 |
-| 个股详情 | 点击自选或推荐标的打开：分时 / 5日 / 日K / 周K / 月K / 60–1 分 K，十字光标、缩放平移、MA + MACD/KDJ/RSI、复权切换、买卖模拟 | 交易时段 5 秒 |
+| Index tape | SSE / SZSE / ChiNext / STAR 50 / BSE 50; click any index for its intraday chart and K-lines | 3–30 s (selectable) |
+| Market sentiment | Advancers / decliners, limit-up / limit-down, broken-board rate, consecutive-board ladder, 0–100 sentiment score | 5 s |
+| Top sectors | Industry and concept boards scored on change + main-force net inflow + breadth + 5-day momentum; click for constituents | 20 s |
+| Sector trend | Intraday change curves for the top 50 boards (09:30–15:00) with end labels; replay any of the last 30 sessions | 60 s |
+| Stock picks | Candidate pool → multi-strategy scoring → technical confirmation, with hit tags and reasons | 45 s |
+| Watchlist | Live price, change, volume ratio, main-force net, hit signals; search by code or name | 3–30 s |
+| Positions | Paper-account total, market value, unrealised P&L; click a position to reopen the stock | with snapshot |
+| Alerts | Limit-up, approaching limit, speed, volume ratio, main-force moves, MA crosses, 20-day high | with snapshot |
+| Stock detail | Open from the watchlist or the picks: intraday / 5-day / daily / weekly / monthly / 60–1 min K, crosshair, zoom & pan, MA + MACD/KDJ/RSI, adjustment, paper trading | 5 s while trading |
 
 ## Detail page
 
@@ -34,87 +38,154 @@ Opening a stock (or an index) gives a quote page, not just a chart:
 
 | Block | Content |
 | --- | --- |
-| 盘口 | 今开/最高/最低/昨收/涨停/跌停/振幅/换手/成交量/成交额/量比/5日均量/总市值/流通市值/市盈率(亏损显示"亏损")/市净率 |
-| 资金流向 | 主力净额 + 超大单/大单/中单/小单 四档净额（居中双向条），今日累计主力净流入曲线，近 5 日主力净额与当日涨跌 |
-| 技术面 | MA5/10/20/60 与多空排列，MACD/KDJ/RSI 状态，20 日与 60 日区间位置 |
-| 所属板块 | 行业标签（可点击进板块）+ 题材优先的所属板块标签，风格/指数类板块排在后面 |
-| 消息面 | 最新新闻 8 条 + 公司公告 6 条，含时间与来源，点击新标签打开原文 |
-| AI 分析 | 用同一批数据做六维上涨空间推演（技术/量能/资金/板块情绪/消息/估值），每维 0-100 分 + 多空判断 + 理由与风险，并给总评、置信度、支撑压力目标；支持多轮追问 |
-| 图表 | 分时 / 5日 / 日K / 周K / 月K / 60–1 分 K，十字光标、缩放平移 |
+| Order book | Open / high / low / prev close / limit-up / limit-down / amplitude / turnover rate / volume / amount / volume ratio / 5-day average volume / market cap / float cap / P/E (shows "亏损" when loss-making) / P/B |
+| Money flow | Main-force net plus super-large / large / medium / small order nets (centred two-way bars), today's cumulative main-force curve, last 5 sessions' net and daily change |
+| Technicals | MA5/10/20/60 and their alignment, MACD / KDJ / RSI state, position inside the 20- and 60-day range |
+| Boards | Industry tags (clickable) followed by theme-first board tags; style and index boards come last |
+| News | 8 latest stories + 6 company announcements with time and source; click a tag to open the original |
+| AI analysis | Six-dimension upside analysis over the same numbers (technicals / volume / money flow / sector & sentiment / news / valuation), each 0-100 with a stance, reasons and risks, plus a verdict, confidence and support/resistance targets; multi-turn follow-ups |
+| Chart | Intraday / 5-day / daily / weekly / monthly / 60–1 min K with crosshair, zoom and pan |
 
-Data: quotes + K 线来自东方财富行情，资金流来自其 `fflow`（今日分时累计 + 历史日线）接口，所属板块来自 `slist`，新闻与公告来自其搜索/公告接口；技术指标由日线 K 线本地计算（MA/RSI/MACD/KDJ/区间位置）。
+Data: quotes and K-lines come from Eastmoney, money flow from its `fflow`
+endpoint (intraday cumulative + historical daily), board membership from
+`slist`, news and announcements from its search and announcement endpoints.
+Technical indicators are computed locally from daily bars (MA / RSI / MACD /
+KDJ / range position).
 
 ## Performance & resilience
 
-- **K 线双数据源**：主源是东财历史主机，失败或返回空时自动切到腾讯公开 K 线接口（日/周/月 + 1/5/15/30/60 分钟，含前/后复权），技术指标随之恢复。
-- **K 线落盘缓存**：成功响应存在 `<DSH_HOME>/ashare-radar/klines/`，两个数据源都不可用时回放最近一次数据，并在图表上方标注「显示最近一次缓存」。
-- **行情主机兜底**：主行情域 `push2` 被限流或掉线时自动切到 `push2delay`（延迟行情），并熔断 60 秒不再先试主域，避免每次请求都先失败一次。板块成分股、指数、自选、分时都走这条路径。
-- **板块走势的取数深度**：库里已有前一交易日数据时只取 1 天（响应里的 `fetchDays: 1`），没有历史才回补 5 天——上游字节量降到 1/5。
-- **K 线不再每 5 秒穿透缓存**：图表每 5 秒轮询，但 K 线只有缓存超过 30 秒才回源；未收盘那根由前端用最新价补齐。
-- **走势图几何记忆化**：50 条 × 241 点 ≈ 12k 段路径只在数据变化时重建，鼠标移动只重画十字线。
-- **走势卡片进入视口才请求**：首屏不再为主页下半部分付 50 次上游调用（`IntersectionObserver`，带 240px 预取）。
-- **空板块明确提示**：统计类板块若无成分股，显示「该板块没有成分股数据（多为统计类板块）」而不是通用错误。
+- **Two K-line sources**: Eastmoney's history host is primary; on failure or an
+  empty reply the plugin switches to Tencent's public K-line API (daily / weekly
+  / monthly + 1/5/15/30/60-minute, with forward and backward adjustment), so
+  indicators recover with the chart.
+- **K-lines cached on disk**: successful responses are stored under
+  `<DSH_HOME>/ashare-radar/klines/`; when both sources are unreachable the last
+  copy is replayed and the chart is labelled "showing the last cached candles".
+- **Quote-host fallback**: when `push2` is throttled or down the plugin moves to
+  `push2delay` (delayed quotes) and trips a 60-second breaker so requests stop
+  paying the failed attempt first. Board constituents, indices, watchlist quotes
+  and intraday charts all take this path.
+- **Sector-trend fetch depth**: once the previous session is stored, a refresh
+  pulls one day instead of five (`fetchDays: 1` in the response), cutting
+  upstream bytes by 5×.
+- **K-lines no longer punch through the cache every 5 s**: the chart polls every
+  5 s but bars are only refetched when the cached copy is older than 30 s; the
+  forming bar is patched client-side from the latest price.
+- **Chart geometry is memoised**: 50 curves × 241 points ≈ 12k path segments are
+  rebuilt only when the data changes; moving the pointer redraws just the
+  crosshair.
+- **The trend card waits for the viewport**: the first paint no longer pays 50
+  upstream calls for the lower half of the page (`IntersectionObserver` with a
+  240px prefetch margin).
+- **Empty boards explain themselves**: a computed board with no constituents
+  says so instead of showing a generic error.
 
-当前 30 天存储规模：60 个板块 × 5 个交易日 ≈ 790 KB，满 30 天约 4–5 MB。
+Current 30-day storage footprint: 60 boards × 5 sessions ≈ 790 KB, roughly 4–5 MB
+once the full 30 days are filled.
 
 ## Sector trend
 
-板块走势卡片画的是「板块相对昨收的涨跌幅曲线」：X 轴固定为交易时段（09:30–11:30、13:00–15:00），Y 轴以 0 为中轴对称。
+The trend card plots each board's change against the previous close: the X axis is
+fixed to the trading session (09:30–11:30, 13:00–15:00) and the Y axis is
+symmetric around zero.
 
-- 一次画**排名前 50 的板块**（行业 + 概念合并按当日涨幅排序），领先的 8 个用粗线突出
-- 曲线**末端直接标注板块名**，重叠的自动跳过（最多 12 个标签）
-- **入场动画**：从 0 轴整体展开（scaleY 0→1，720ms），进入卡片或切换日期时重放；轮询刷新不重放
-- 线色按当日涨跌：红涨绿跌，弱化为 0.3 透明度，避免 50 条线糊成一团
+- Draws the **top 50 boards** in one pass (industry + concept merged and ranked by
+  the day's change); the leading 8 are drawn bolder
+- **Board names are printed at the end of each curve**; overlapping labels are
+  skipped (at most 12)
+- **Entry animation**: the curves are wiped in from the zero axis at x=0 to the end
+  of the X axis (820ms clip reveal); it replays on entry, on a date switch and
+  when the fullscreen view opens, but never on a poll refresh
+- Line colour follows the day's direction — **purple for up, orange for down**,
+  dimmed to 0.3 opacity so 50 lines stay readable
 
-- 数据来源：东财板块分时（`secid=90.BKxxxx`），一次调用取 5 个交易日，按前一日收盘逐日归一
-- 存储：`<DSH_HOME>/ashare-radar/sectors/YYYY-MM-DD.json`，一天一个文件，**保留 30 天**，过期文件在每次写入时清理
-- 每天最多保留 40 个板块（面板挑选的板块会轮换，文件不会无限膨胀）；已收盘且满 241 分钟的日子不再重写
-- 打开当天数据时顺带补齐前 4 个交易日，所以第一次使用就有 5 天可回看
-- 日期按钮只列有存档的日子，切换即读本地文件，不产生上游请求
+Data and storage:
+
+- Source: Eastmoney board intraday (`secid=90.BKxxxx`), five sessions per call,
+  each day re-based on the previous day's close
+- Storage: `<DSH_HOME>/ashare-radar/sectors/YYYY-MM-DD.json`, one file per
+  session, **kept for 30 days**, expired files pruned on every write
+- At most 60 boards per day (the panel rotates which boards it views, so files
+  cannot grow without bound); finished sessions with all 241 minutes are never
+  rewritten
+- Opening a session backfills the previous four, so a fresh install already has
+  five days to browse
+- The date buttons list stored sessions only; switching reads from disk and makes
+  no upstream request
 
 ## AI analysis
 
-The detail page ends with an **AI 分析** panel. It sends the same numbers the page draws — quote, 成交, 规模, 均线, 区间, MACD/KDJ/RSI, 量能, 资金四档, 所属板块, 市场情绪, 新闻与公告 — as a compact brief to the Host's `llm` service, using the profile's default model.
+The detail page ends with an **AI analysis** panel. It sends the same numbers the
+page draws — quote, volume, size, moving averages, range, MACD/KDJ/RSI, volume
+state, the four money-flow buckets, boards, market sentiment, news and
+announcements — as a compact brief to the Host's `llm` service, using the
+profile's default model.
 
-- 六个维度：技术面 / 量能 / 资金面 / 板块与情绪 / 消息面 / 估值，各给 0-100 分与偏多 / 中性 / 偏空
-- 系统提示要求：只引用简报里的数字，缺数据就说"数据不足"，不得编造财报与政策
-- 输出为严格 JSON，由 Host 解析后下发（`done.parsed`），面板渲染成维度卡片
-- 输出被 token 上限截断时，解析器会退回最后一个完整结构，仍把已完成的维度渲染成卡片；完全无法解析才退回「原文」块并提示重试
-- 支持追问（多轮），追问时重新注入最新数据，回答为纯文本
-- 响应是 NDJSON 流（`delta` / `meta` / `error` / `done`），边生成边显示
-- 该 POST 路由走主机的请求闸门：只有已登录的本机页面能调用，避免任意本地进程消耗模型额度
+- Six dimensions: technicals / volume / money flow / sector & sentiment / news /
+  valuation, each with a 0-100 score and a bullish / neutral / bearish stance
+- The system prompt requires citing only the brief's numbers, saying "数据不足"
+  when something is missing, and never inventing financials or policy
+- Output is strict JSON parsed by the Host and sent as `done.parsed`; the panel
+  renders it as dimension cards
+- If the output is cut off by the token limit, the parser falls back to the last
+  complete structure and still renders finished dimensions; only a totally
+  unparseable response falls back to a raw block with a retry hint
+- Follow-ups are supported (multi-turn) and re-inject the latest data; answers
+  are plain text
+- The response is an NDJSON stream (`delta` / `meta` / `error` / `done`), rendered
+  as it generates
+- The POST route goes through the Host's request gate: only the signed-in local
+  page can call it, so arbitrary local processes cannot spend model quota
 
 ## Drill-downs
 
-- **指数 → 图**：点击指数条任意指数，打开与个股同款的分时 / 日K / 周K / 月K 图（指数不提供买卖）
-- **板块 → 成分股**：点击行业或概念板块，打开成分股列表，可按涨幅 / 主力 / 量比 / 换手 / 涨速 / 市值排序，点击任一成分股进入其行情图
-- **个股 → 持仓**：成交后侧栏「我的持仓」即时出现，显示成本、现价与浮盈，点击回到个股
+- **Index → chart**: click any index for the same intraday / daily / weekly /
+  monthly charts as a stock (indices have no trading panel)
+- **Board → constituents**: click an industry or concept board for its
+  constituents, sortable by change / main force / volume ratio / turnover /
+  speed / market cap; click a row for that stock's chart
+- **Stock → position**: a fill appears immediately in "Positions" with cost,
+  last price and unrealised P&L; click it to reopen the stock
 
 ## Review notes
 
 Deliberate choices that came out of the professional pass:
 
-- 轮询随交易时段自适应：交易时段按所选频率（默认 5 s），休市自动降到 ≥30 s，避免无意义的请求
-- 头部显示**行情时间**而不是后端耗时；指数用 secid 寻址，避免「上证指数 000001」与「平安银行 000001」撞码
-- 价格统一两位小数，红涨绿跌，数字使用等宽字形
-- 推荐个股按**策略族**去重后再按评分填充，不会八只都是同一个动量规则；评分带口径说明
-- 未持仓时「卖出」禁用；指数详情不出现交易面板
+- Polling adapts to the session: the selected cadence while trading (5 s by
+  default), automatically ≥30 s when closed
+- The header shows **quote time**, not backend latency; indices are addressed by
+  secid so "上证指数 000001" and "平安银行 000001" never collide
+- Prices use two decimals, **purple for up and orange for down**, figures in
+  tabular numerals
+- Picks are de-duplicated by strategy family before scoring fills the list, so
+  you never get eight copies of the same momentum rule; scores carry their rubric
+- "Sell" is disabled without a position; index detail has no trading panel
 
 ## Chart conventions
 
-The detail chart follows the layout and interaction rules A-share trading desks expect:
+The detail chart follows the layout and interaction rules A-share desks expect:
 
-- **周期**：分时、5 日分时、日 K、周 K、月 K、60/30/15/5/1 分钟
-- **主图**：蜡烛（阳线空心、阴线实心）或分时折线；MA5/10/20 叠加可开关
-- **副图**：成交量 + MACD / KDJ / RSI（可切换「无」）
-- **分时**：以昨收为中心的对称价格轴、均价线、昨收虚线、涨停/跌停虚线（主板 10%、双创 20%、北交所 30%、ST 5%）
-- **十字光标**：吸附最近一根，跟随鼠标给出 日期/开/高/低/收/涨跌幅/量，同时标注右侧价格与底部日期
-- **交互**：滚轮缩放（以光标为锚点）、拖动平移、双击复位、方向键移动光标、`+`/`-` 缩放、`0` 复位
-- **复权**：前复权 / 不复权 / 后复权
-- **实时**：交易时段每 5 秒拉取一次并跳过缓存；未收盘的那根随最新价更新 高低收
-- **放大**：弹窗内可一键展开到接近全屏，便于看图
-
-- **列表迷你分时**：自选、推荐、板块成分股每一行都带 24px 高的分时缩略线（红涨绿跌、昨收虚线），并在 5 分钟急拉/急跌时打上「急拉」「急跌」角标（阈值随涨跌幅限制缩放，且只认最近 40 分钟内的急拉段）
+- **Periods**: intraday, 5-day intraday, daily, weekly, monthly, 60/30/15/5/1
+  minutes
+- **Main pane**: candlesticks (hollow up, solid down) or the intraday line; MA
+  5/10/20 overlays, toggleable
+- **Sub panes**: volume + MACD / KDJ / RSI (switchable to none)
+- **Intraday**: price axis symmetric around the previous close, average line,
+  dashed previous close, dashed limit-up / limit-down (10% main board, 20%
+  ChiNext/STAR, 30% BSE, 5% ST)
+- **Crosshair**: snaps to the nearest bar, follows the pointer with
+  date/open/high/low/close/change/volume, and labels the price on the right and
+  the date at the bottom
+- **Interaction**: wheel zoom anchored at the pointer, drag to pan, double-click
+  to reset, arrow keys to move the cursor, `+`/`-` to zoom, `0` to reset
+- **Adjustment**: forward / none / backward
+- **Live**: refreshed every 5 s while trading; the forming bar's high/low/close
+  follow the latest price
+- **Fullscreen**: one click expands the dialog to near full screen
+- **Row sparklines**: every watchlist, pick and constituent row carries a 24px
+  intraday sparkline (purple/orange, dashed previous close) plus "急拉" /
+  "急跌" badges when a sharp move happens within 5 minutes (threshold scaled to
+  the price limit, and only the last 40 minutes count)
 
 ## Strategy families
 
@@ -122,44 +193,48 @@ Each stock is scored by the rules below; tags name the rules that fired.
 
 | Tag | Family | Rule |
 | --- | --- | --- |
-| 均线趋势 | 趋势跟随 | MA5 > MA10 > MA20 多头排列，价格站上 MA5，MA20 上翘 |
-| 放量突破 | 量价形态 | 量比 ≥ 1.5 的阳线突破 20 日新高 |
-| 动量强势 | 动量因子 | 近 20 日涨幅 ≥ 15% |
-| 主力吸筹 | 资金流 | 主力净流入 / 成交额 ≥ 5% |
-| 超跌反弹 | 均值回归 | 20 日乖离 ≤ -8% 且 RSI6 ≤ 34 |
-| 涨停接力 | 情绪博弈 | 封板或逼近涨停（主板 9.6%，创业板/科创板 19.4%） |
-| 低估值 | 价值 | PE ≤ 18、PB ≤ 2、市值 ≥ 100 亿，叠加趋势确认 |
-| 板块风口 | 板块轮动 | 所属行业进入当日板块涨幅榜前列 |
+| 均线趋势 | Trend following | MA5 > MA10 > MA20 bullish alignment, price above MA5, MA20 turning up |
+| 放量突破 | Volume/price pattern | Bullish break of a 20-day high with volume ratio ≥ 1.5 |
+| 动量强势 | Momentum | 20-day gain ≥ 15% |
+| 主力吸筹 | Money flow | Main-force net inflow / turnover ≥ 5% |
+| 超跌反弹 | Mean reversion | 20-day deviation ≤ -8% and RSI6 ≤ 34 |
+| 涨停接力 | Sentiment | Limit-up or approaching it (9.6% main board, 19.4% ChiNext/STAR) |
+| 低估值 | Value | P/E ≤ 18, P/B ≤ 2, market cap ≥ ¥10bn, plus trend confirmation |
+| 板块风口 | Rotation | The stock's industry ranks near the top of the day's board table |
 
-Scores are a soft-capped sum of the rule weights, so a name that fires five
-rules separates from one that fires two instead of both saturating.
+Scores are a soft-capped sum of the rule weights, so a name that fires five rules
+separates from one that fires two instead of both saturating.
 
 ## Data
 
-Public, keyless read-only feeds:
+Public, keyless, read-only feeds:
 
-- 东方财富行情 `push2.eastmoney.com` — 指数、个股、板块、K 线
-- 东方财富涨停池 `push2ex.eastmoney.com` — 涨停 / 跌停 / 炸板、连板数、封单
-- 雪球涨跌家数 `flash-api.xuangubao.cn` — 上涨/下跌/涨停家数曲线
+- Eastmoney quotes `push2.eastmoney.com` — indices, stocks, boards, K-lines
+- Eastmoney limit pools `push2ex.eastmoney.com` — limit-up / limit-down / broken
+  boards, consecutive-board counts, sealing orders
+- Xueqiu breadth `flash-api.xuangubao.cn` — advancers / decliners / limit-up
+  counts
+- Tencent K-lines `web.ifzq.gtimg.cn` — daily/weekly/monthly and minute bars,
+  used only as the fallback
 
-The Host half caches each feed (quotes 2.5 s, boards 20 s, K 线 4 min) and
-falls back to the last good value when an upstream feed errors; failed sources
-are reported in the panel instead of blanking it.
+The Host half caches each feed (quotes 2.5 s, boards 20 s, K-lines 4 min) and
+falls back to the last good value when an upstream errors; failed sources are
+reported in the panel instead of blanking it.
 
 ## Host surface
 
-Read-only HTTP routes, same origin as the Web UI:
+Read-only HTTP routes on the same origin as the Web UI:
 
 - `GET /ashare-radar/api/snapshot?codes=600519,000001&mode=full|light&limit=8`
 - `GET /ashare-radar/api/quote?codes=...`
 - `GET /ashare-radar/api/sector?kind=industry|concept`
 - `GET /ashare-radar/api/search?q=宁德`
-- `GET /ashare-radar/api/detail?code=600519&period=trend|trend5|day|week|month|m60|m30|m15|m5|m1&adjust=0|1|2&fresh=0|1` — 分时（含涨跌停价）或 K 线，附快照
-- `GET /ashare-radar/api/sector-trend?date=2026-11-10&codes=BK0459,BK1340` — 板块当日曲线（日切，含 30 天日期索引）
-- `GET /ashare-radar/api/board?code=BK0459&sort=f3|f62|f10|f8|f22|f20&limit=50` — 板块成分股
-- `GET /ashare-radar/api/flow?code=600519[&secid=1.000001]` — 今日分时资金流 + 近 5 日
-- `GET /ashare-radar/api/news?code=600519&name=贵州茅台` — 个股新闻 + 公司公告
-- `POST /ashare-radar/api/analyze` — AI 多维分析（NDJSON 流），body `{code,name,question?,history?}`
+- `GET /ashare-radar/api/detail?code=600519&period=trend|trend5|day|week|month|m60|m30|m15|m5|m1&adjust=0|1|2&fresh=0|1` — intraday (with limit prices) or K-lines, plus a snapshot
+- `GET /ashare-radar/api/sector-trend?date=2026-11-10&codes=BK0459,BK1340` — board curves for one session (with a 30-day date index)
+- `GET /ashare-radar/api/board?code=BK0459&sort=f3|f62|f10|f8|f22|f20&limit=50` — board constituents
+- `GET /ashare-radar/api/flow?code=600519[&secid=1.000001]` — today's intraday money flow plus 5 sessions
+- `GET /ashare-radar/api/news?code=600519&name=贵州茅台` — news and announcements
+- `POST /ashare-radar/api/analyze` — AI analysis (NDJSON stream), body `{code,name,question?,history?}`
 - `GET /ashare-radar/api/strategies`
 
 Agent tool `ashare_radar`:
@@ -171,12 +246,20 @@ codes?: ["600519"]   limit?: 8
 
 ## Notes
 
-- 交易时段以外仍显示最近一笔行情；市场状态（未开盘/集合竞价/交易中/午间休市/已收盘/周末休市）按 Asia/Shanghai 计算。
-- 节假日没有内置日历：若上游无成交，页面显示最近收盘数据。
-- 自选、刷新频率与模拟账户存在浏览器 `localStorage`（`ashare-radar.watchlist.v1`、`ashare-radar.speed.v1`、`ashare-radar.account.v1`）。
-- **买卖是模拟盘**：按最新价在本地记账（初始 100 万，100 股一手），不接券商、不发真实委托。
-- 策略信号只描述规则命中，**不构成投资建议**。
+- Outside the session the last quote still shows; the market phase (pre-open /
+  auction / trading / lunch break / closed / weekend) is computed for
+  Asia/Shanghai
+- There is no holiday calendar: when upstream has no prints the page shows the
+  last close
+- The watchlist, refresh cadence and paper account live in browser
+  `localStorage` (`ashare-radar.watchlist.v1`, `ashare-radar.speed.v1`,
+  `ashare-radar.account.v1`)
+- **Trading is a paper account**: fills are booked locally at the last price
+  (¥1,000,000 start, 100-share lots); no broker, no real orders
+- Strategy signals describe rule hits only and are **not investment advice**
 
 ## License
 
-MIT —— 见 [LICENSE](./LICENSE)。行情数据来自东方财富、腾讯、雪球的公开接口，仅供个人研究使用，不构成投资建议。
+MIT — see [LICENSE](./LICENSE). Market data comes from public endpoints of
+Eastmoney, Tencent and Xueqiu; the plugin is for personal research and is not
+investment advice.
